@@ -1,16 +1,27 @@
 #!/usr/bin/env bash
 set -e
 
-out=$(gh pr view --json number --json body)
+# get the number from args if provided
+number=$1
 
-# Extract the number from the output
-number=$(echo "$out" | jq -r '.number')
+# if no number is provided, get the number from the current PR
+if [ -z "$number" ]; then
+    number=$(gh pr view --json number --jq '.number')
+fi
+
+if [ -z "$number" ]; then
+    echo "No PR number provided"
+    exit 1
+fi
 
 # Extract the body from the output
-body=$(echo "$out" | jq -r '.body')
+body=$(gh pr view "$number" --json body --jq '.body')
 
 # Update all occurences of `${prNumber}` in the body with the actual number
 updated_body=$(echo "$body" | sed "s/\${prNumber}/$number/g")
 
-# Update the PR body with the new content
-gh pr edit "$number" --body "$updated_body"
+# check if the body has changed
+if [ "$body" != "$updated_body" ]; then
+    # Update the PR body with the new content
+    gh pr edit "$number" --body "$updated_body"
+fi
