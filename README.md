@@ -1,20 +1,21 @@
 # gh-pr-number
 
-A Node.js tool for automatically replacing `${prNumber}` placeholders in GitHub PR descriptions with the actual PR number, plus configurable URL replacements.
+A Go tool for automatically replacing `${prNumber}` placeholders in GitHub PR descriptions with the actual PR number, plus configurable URL replacements.
 
 ## Project Structure
 
 ```
 gh-pr-number/
-├── src/
-│   ├── config.js      # Configuration loading
-│   ├── github.js      # GitHub CLI interactions
-│   ├── main.js        # Main orchestration logic
-│   ├── parse.js       # Native argument parsing
-│   └── replacements.js # Text replacement functions
-├── index.js           # Entry point
-├── magics.config.json # Configuration file
-└── package.json
+├── cmd/
+│   └── root.go         # Command line interface using Cobra
+├── internal/
+│   ├── config/         # Configuration loading
+│   ├── github/         # GitHub CLI interactions
+│   └── replacements/   # Text replacement functions
+├── main.go             # Entry point
+├── go.mod              # Go module definition
+├── magics.config.json  # Configuration file
+└── README.md
 ```
 
 ## Features
@@ -23,14 +24,14 @@ gh-pr-number/
 - Replaces `${prNumber}` placeholders with actual PR number
 - Configurable URL replacements that run before PR number replacement
 - JSON-based configuration system
-- Command-line interface with options
+- Command-line interface with options using Cobra
 
 ## Installation
 
 1. Clone this repository
-2. Install dependencies:
+2. Build the binary:
    ```bash
-   npm install
+   go build -o gh-pr-number
    ```
 
 ## Usage
@@ -40,13 +41,13 @@ gh-pr-number/
 Process the current PR:
 
 ```bash
-node index.js
+./gh-pr-number
 ```
 
 Process a specific PR:
 
 ```bash
-node index.js --number 123
+./gh-pr-number --number 123
 ```
 
 ### Configuration
@@ -106,16 +107,18 @@ PR number: 123
 
 ## Requirements
 
-- Node.js
+- Go 1.21 or later
 - GitHub CLI (`gh`) installed and authenticated
 - Git repository with GitHub remote
 
-## Migration from Bash Version
+## Migration from Node.js Version
 
-The original bash script has been migrated to Node.js with enhanced features:
+The original Node.js script has been migrated to Go with enhanced features:
 
 - ✅ Same core functionality
 - ✅ Configurable URL replacements
 - ✅ Better error handling
-- ✅ Command-line options
+- ✅ Command-line options using Cobra
 - ✅ JSON configuration system
+- ✅ Single binary distribution
+- ✅ Better performance
