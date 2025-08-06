@@ -1,7 +1,6 @@
 package replacements
 
 import (
-	"fmt"
 	"regexp"
 
 	"github.com/maastrich/gh-pr-number/internal/config"
@@ -12,7 +11,6 @@ func ApplyURLReplacements(body string, cfg *config.Config, prNumber string) stri
 	updatedBody := body
 
 	if cfg.URLReplacements != nil {
-		fmt.Println(cfg.URLReplacements)
 		for from, to := range cfg.URLReplacements {
 			escapedFrom := escapeRegExp(from)
 			re := regexp.MustCompile(escapedFrom)

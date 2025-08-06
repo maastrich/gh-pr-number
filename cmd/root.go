@@ -61,7 +61,7 @@ func run(cmd *cobra.Command, args []string) error {
 	}
 
 	// Apply URL replacements first
-	updatedBody := replacements.ApplyURLReplacements("http://localhost:3000/toto", cfg, prNumber)
+	updatedBody := replacements.ApplyURLReplacements(body, cfg, prNumber)
 
 	// Then apply PR number replacement
 	updatedBody = replacements.ApplyPRNumberReplacement(updatedBody, prNumber)
