@@ -57,7 +57,6 @@ Create a `magics.config.json` file in your project root to configure URL replace
 ```json
 {
   "urlReplacements": {
-    "http://localhost:3112": "https://pr-${prNumber}.lcm.live.mobsuccess.com",
     "http://localhost:3000": "https://pr-${prNumber}.dev.example.com"
   }
 }
@@ -93,7 +92,7 @@ And your `magics.config.json` has:
 ```json
 {
   "urlReplacements": {
-    "http://localhost:3112": "https://pr-${prNumber}.lcm.live.mobsuccess.com"
+    "http://localhost:3000": "https://pr-${prNumber}.example.com"
   }
 }
 ```
@@ -101,7 +100,7 @@ And your `magics.config.json` has:
 For PR #123, it will become:
 
 ```
-Check out the preview at https://pr-123.lcm.live.mobsuccess.com
+Check out the preview at https://pr-123.example.com
 PR number: 123
 ```
 
