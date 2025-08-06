@@ -1,0 +1,5 @@
+{
+  "urlReplacements": {
+    "http://localhost:3000": "https://pr-${prNumber}.example.com"
+  }
+}

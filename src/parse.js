@@ -28,6 +28,8 @@ export function parseArgs(argv) {
       } else {
         throw new Error("--number requires a value");
       }
+    } else if (arg === "--") {
+      break;
     } else if (arg.startsWith("--")) {
       throw new Error(`Unknown option: ${arg}`);
     } else if (arg.startsWith("-") && arg.length > 1) {
